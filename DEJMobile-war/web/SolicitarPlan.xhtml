@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
+        <center>
+            <h1>ARMA TU PLAN :: PASO 1</h1>
+            <h:form id="form">
+                <p:panel id="Plan" header="Plan" style="margin-top: 20px ;height:500px; width: 450px;">
+                    <h:panelGrid columns="2" cellpadding="1">
+                        <h:outputText value="Cuota " />
+                        <p:selectOneMenu id="cuota" value="" style="width:150px">
+                            <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="" />
+                        </p:selectOneMenu>
+                        <h:outputText value="Minutos " />
+                        <p:selectOneRadio id="minutos" value=""  layout="grid" columns="3">
+                            <f:selectItems value="" var="" itemLabel="" itemValue=""/>
+                        </p:selectOneRadio>
+                        <p:selectBooleanCheckbox value="" />
+                        <h:outputText value="Entrega del Chip en Domicilio"/>
+
+                        <p:link outcome="MenuCliente" value="Volver"></p:link><br/>
+                        <p:commandButton value="Paso 2"/>
+                    </h:panelGrid>
+                </p:panel>
+
+            </h:form>
+
+        </center>
+
+    </h:body>
+</html>
+

@@ -1,3 +1,6 @@
 /DEJMobile-ejb/nbproject/private/
 /nbproject/private/
 /DEJMobile-war/nbproject/private/
+/DEJMobile-war/build/
+/DEJMobile-ejb/build/
+/DEJMobile-ejb/dist/

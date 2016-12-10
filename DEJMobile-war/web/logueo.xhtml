@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -14,20 +15,34 @@
                 <h:graphicImage library="images" name="acceso.jpg" />
                 <br></br>
                 <p:panel id="login" header="Acceso" style="margin-bottom:20px; width: 600px;" >
-                    <h:panelGrid columns="2" cellpadding="10">
-                        <h:outputText value="RUT" />
-                        <p:inputText value="#{clienteBean.rut}" required="true" requiredMessage="Debe ingresar un rut"/>
-                        <h:outputText value="CLAVE" />
-                        <p:password value="#{clienteBean.clave}" required="true" requiredMessage="Debe ingresar clave"/>
-                        <h:outputText value="" />
-                        <p:commandButton value="INGRESAR"  action="#{clienteBean.login()}" immediate="true"/>
-                        <p:link outcome="Registro" value="Registrarse" style="margin-bottom: 20px;"/>
-                        <p:link outcome="index" value="Menú cliente (Enlace a la mala)"/>
-                    </h:panelGrid>
+                    <!--<p:link outcome="Registro" value="Registrarse" style="margin-bottom: 20px;"/>
+                         <p:link outcome="index" value="Menú cliente (Enlace a la mala)"/>
+                     </h:panelGrid>
+                    -->
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="rut" value="RUT" />
+                        <p:inputText id="username" value="#{clienteBean.rut}" required="true" label="username" />
 
+                        <h:outputLabel for="password" value="CLAVE" />
+                        <p:password id="password" value="#{clienteBean.clave}" required="true" label="password" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Login" update="msgs" actionListener="#{clienteBean.login}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)" />
+                        </f:facet>  
+                    </h:panelGrid>
                 </p:panel>
             </center>
         </h:form>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (!args.validationFailed || args.loggedIn) {
+                    setTimeout(function () {
+                        window.location = args.view;
+                    }, 500);
+                }
+            }
+        </script>
     </h:body>
 </html>
 

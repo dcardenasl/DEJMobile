@@ -14,7 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import org.primefaces.context.RequestContext;
 import pojos.Cliente;
 import services.ClienteFacadeLocal;
@@ -50,6 +52,14 @@ public class ClienteBean implements Serializable {
 
     public ClienteBean() {
         cliente = new Cliente();
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public int getRut() {
@@ -127,23 +137,27 @@ public class ClienteBean implements Serializable {
     public List<Cliente> getPasajeros() {
         return clienteFacade.findAll();
     }
-
-    public void login() {
+    
+    public void login(ActionEvent event) {
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage message = null;
+        boolean loggedIn = false;
         Cliente c = clienteFacade.find(rut);
-
-        if (rut != 0 && clave.equals(c.getClave())) {
+         
+        if(c != null && clave != null && clave.equals(c.getClave())) {
+            loggedIn = true;
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", c.getNombre()+" "+ c.getApellidoPaterno());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", c);
-            try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/index.xhtml");
-            } catch (IOException ex) {
-                Logger.getLogger(ClienteBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
         } else {
-            new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Datos incorrectos. Vuelva a intentarlo");
+            loggedIn = false;
+            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
         }
-
-    }
+         
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        context.addCallbackParam("loggedIn", loggedIn);
+        if(loggedIn)
+            context.addCallbackParam("view", "index.xhtml");
+    }   
 
     public void verificarSesionCliente() {
         try {
@@ -154,6 +168,16 @@ public class ClienteBean implements Serializable {
             }
         } catch (Exception e) {
             //log
+        }
+    }
+    
+    public boolean verificarSesion() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Cliente c = (Cliente) context.getExternalContext().getSessionMap().get("cliente");
+        if (c == null) {
+            return false;
+        } else {
+            return true;
         }
     }
 

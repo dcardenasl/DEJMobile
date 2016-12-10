@@ -44,7 +44,7 @@ public class ClienteBean implements Serializable {
     private int numeracion;
     private String comuna;
     private int telefono;
-
+    boolean loggedIn = false;
     private Cliente cliente;
 
     public ClienteBean() {
@@ -134,27 +134,27 @@ public class ClienteBean implements Serializable {
     public List<Cliente> getPasajeros() {
         return clienteFacade.findAll();
     }
-    
+
     public void login(ActionEvent event) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage message = null;
-        boolean loggedIn = false;
+
         Cliente c = clienteFacade.find(rut);
-         
-        if(c != null && clave != null && clave.equals(c.getClave())) {
+
+        if (c != null && clave != null && clave.equals(c.getClave())) {
             loggedIn = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", c.getNombre()+" "+ c.getApellidoPaterno());
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", c.getNombre() + " " + c.getApellidoPaterno());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", c);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            context.addCallbackParam("loggedIn", loggedIn);
+            context.addCallbackParam("view", "index.xhtml");
         } else {
             loggedIn = false;
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
+            context.addCallbackParam("view", "logueo.xhtml");
         }
-         
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        context.addCallbackParam("loggedIn", loggedIn);
-        if(loggedIn)
-            context.addCallbackParam("view", "index.xhtml");
-    }   
+
+    }
 
     public void verificarSesionCliente() {
         try {
@@ -167,7 +167,7 @@ public class ClienteBean implements Serializable {
             //log
         }
     }
-    
+
     public boolean verificarSesion() {
         FacesContext context = FacesContext.getCurrentInstance();
         Cliente c = (Cliente) context.getExternalContext().getSessionMap().get("cliente");
@@ -180,7 +180,8 @@ public class ClienteBean implements Serializable {
 
     public String cerrarSesion() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "index";
+        loggedIn = false;
+        return "logueo";
     }
 
 }

@@ -31,6 +31,7 @@ public class ClienteBean implements Serializable {
 
     @EJB
     private ClienteFacadeLocal clienteFacade;
+    
 
     /**
      * Creates a new instance of ClienteBean
@@ -46,6 +47,8 @@ public class ClienteBean implements Serializable {
     private int telefono;
     boolean loggedIn = false;
     private Cliente cliente;
+    
+    private ComunaBean comunaBean;
 
     public ClienteBean() {
         cliente = new Cliente();
@@ -184,4 +187,22 @@ public class ClienteBean implements Serializable {
         return "logueo";
     }
 
+    public String signIn()
+    {
+        Cliente c = new Cliente();
+        c.setRut(rut);
+        c.setClave(clave);
+        c.setNombre(nombre);
+        c.setApellidoPaterno(apellidoPaterno);
+        c.setApellidoMaterno(apellidoMaterno);
+        c.setDireccion(direccion);
+        c.setNumeracion(numeracion);
+        c.setComuna(comuna);
+        c.setTelefono(telefono);
+        this.clienteFacade.create(c);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente creado exitosamente!!!"));
+        return "ClienteBean";
+    }
+      
+    
 }

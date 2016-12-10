@@ -29,6 +29,7 @@ public class ClienteBean implements Serializable {
 
     @EJB
     private ClienteFacadeLocal clienteFacade;
+    
 
     /**
      * Creates a new instance of ClienteBean
@@ -44,6 +45,8 @@ public class ClienteBean implements Serializable {
     private int telefono;
 
     private Cliente cliente;
+    
+    private ComunaBean comunaBean;
 
     public ClienteBean() {
         cliente = new Cliente();

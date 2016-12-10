@@ -6,53 +6,13 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <f:event type="preRenderView" listener="#{clienteBean.verificarSesionCliente()}"/>
     </h:head>
-    <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
-
-        <center>
-
-            <h1>DEJ MOVILE</h1>
-            <img src="resource/images/acceso.jpg"/>
-
-            <h:form>
-                <p:growl id="msgs" sticky="true" showDetail="true" life="3000" />
-
-                <p:panel id="login" header="Acceso" style="margin-bottom:20px" >
-                    <h:panelGrid columns="2" cellpadding="10">
-                        <h:outputText value="RUT" />
-                        <p:inputText value="" required="true" requiredMessage="Debe ingresar un rut"/>
-                        <h:outputText value="CLAVE" />
-                        <p:password value="" required="true" requiredMessage="Debe ingresar clave"/>
-                    </h:panelGrid>
-
-
-                    <f:facet name="footer">
-                        <p:commandButton value="Enviar" update="msgs" actionListener="#{userLoginView.login}" 
-                                         oncomplete="handleLoginRequest(xhr, status, args)" />
-                    </f:facet>  
-                    <br/><br/><br/>
-                    <p:link outcome="Registro" value="Regístrese"></p:link><br/>
-                    <p:link outcome="MenuCliente" value="Menú cliente (Enlace a la mala)"></p:link>
-
-                </p:panel>
-
-
-            </h:form>
-
-        </center>
-        
-        <script type="text/javascript">
-            function handleLoginRequest(xhr, status, args) {
-                if (args.validationFailed || !args.loggedIn) {
-                    PF('dlg').jq.effect("shake", {times: 5}, 100);
-                } else {
-                    PF('dlg').hide();
-                    $('#loginLink').fadeOut();
-                }
-            }
-        </script>
-        <h:outputScript name="js/spanishLocale.js" />
-
-    </h:body>
+        <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
+            <p:commandButton rendered="#{clienteBean.verificarSesionCliente()}" value="CERRAR SESION"  action="#{pasajeroBean.cerrarSesion()}" immediate="true"/>
+            
+            <p:link outcome="SolicitarPlan" value="Solicitar un Plan"></p:link><br/>
+            <p:link outcome="VerPlan" value="Ver mis Planes"></p:link>
+        </h:body>
 </html>
 

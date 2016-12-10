@@ -13,7 +13,7 @@
             <h1>DEJ MOVILE :: REGISTRO</h1>
             <h:form id="form">
                 <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
-                <p:panel id="Registrar" header="REGISTRO" style="margin-top: 20px ;height:500px; width: 450px;">
+                <p:panel id="Registrar" header="REGISTRO" style="margin-top: 20px ;height:530px; width: 650px;">
                     <h:panelGrid columns="2" cellpadding="1">
                         <h:outputText value="Rut " />
                         <p:inputText value="#{clienteBean.rut}" required="true" requiredMessage="Debe ingresar un rut"/>
@@ -42,7 +42,7 @@
                         </p:selectOneMenu>
 
                         <p:outputLabel for="comuna" value="Comuna: " />
-                        <p:selectOneMenu id="comuna" value="#{comunaBean.comuna}" style="width:150px">
+                        <p:selectOneMenu id="comuna" value="#{clienteBean.comuna}" style="width:150px">
                             <f:selectItem itemLabel="Seleccione una Comuna" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{comunaBean.comunas}" />
                         </p:selectOneMenu>
@@ -57,6 +57,7 @@
             </h:form>
         </center>
 
+        
 
         <h:outputScript name="js/spanishLocale.js" />
 

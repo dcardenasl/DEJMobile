@@ -196,7 +196,7 @@ public class ClienteBean implements Serializable {
         c.setApellidoMaterno(apellidoMaterno);
         c.setDireccion(direccion);
         c.setNumeracion(numeracion);
-        c.setComuna(comunaBean.getComuna());
+        c.setComuna(comuna);
         c.setTelefono(telefono);
         this.clienteFacade.create(c);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente creado exitosamente!!!"));

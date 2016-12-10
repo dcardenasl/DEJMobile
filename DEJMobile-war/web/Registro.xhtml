@@ -33,20 +33,21 @@
                         <h:outputText value="Numeración " />
                         <p:inputText value="" required="true" requiredMessage="Debe ingresar una numeración"/>
                         <h:outputText value="Correo Electrónico " />
-                        <p:inputText value="#{pasajeroBean.correoElectronico}" required="true" requiredMessage="Debe ingresar un correo electronico" validatorMessage="Formato de correo no valido">
+                        <p:inputText value="" required="true" requiredMessage="Debe ingresar un correo electronico" validatorMessage="Formato de correo no valido">
                             <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"  />
                         </p:inputText>
 
                         <p:outputLabel for="region" value="Región: " />
-                        <p:selectOneMenu id="region" value="" style="width:150px">
-                            <f:selectItem itemLabel="Seleccione Región" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="" />
+                        <p:selectOneMenu id="region" value="#{comunaBean.region}" style="width:150px">
+                            <p:ajax listener="#{comunaBean.cuandoSeCambiaLaRegion()}" update="comuna" />
+                            <f:selectItem itemLabel="Seleccione una Región" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{comunaBean.regiones}" />
                         </p:selectOneMenu>
 
                         <p:outputLabel for="comuna" value="Comuna: " />
-                        <p:selectOneMenu id="comuna" value="" style="width:150px">
-                            <f:selectItem itemLabel="Seleccione Comuna" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="" />
+                        <p:selectOneMenu id="comuna" value="#{comunaBean.comuna}" style="width:150px">
+                            <f:selectItem itemLabel="Seleccione una Comuna" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{comunaBean.comunas}" />
                         </p:selectOneMenu>
 
                         <h:outputText value="Teléfono " />

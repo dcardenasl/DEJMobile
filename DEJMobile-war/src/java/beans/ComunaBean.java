@@ -43,20 +43,14 @@ public class ComunaBean {
         regiones.put("Región de Atacama", "Región de Atacama");
         regiones.put("Región de Coquimbo", "Región de Coquimbo");
         regiones.put("Región de Valparaíso", "Región de Valparaíso");
-        regiones.put("Región del Libertador General\n"
-                + "Bernardo O'Higgins", "Región del Libertador General\n"
-                + "Bernardo O'Higgins");
+        regiones.put("Región del Libertador General Bernardo O'Higgins", "Región del Libertador General Bernardo O'Higgins");
         regiones.put("Región del Maule", "Región del Maule");
         regiones.put("Región del Biobío", "Región del Biobío");
         regiones.put("Región de la Araucanía", "Región de la Araucanía");
         regiones.put("Región de Los Ríos", "Región de Los Ríos");
         regiones.put("Región de Los Lagos", "Región de Los Lagos");
-        regiones.put("Región de Aysén del General\n"
-                + "Carlos Ibáñez del Campo", "Región de Aysén del General\n"
-                + "Carlos Ibáñez del Campo");
-        regiones.put("Región de Magallanes y de la\n"
-                + "Antártica Chilena", "Región de Magallanes y de la\n"
-                + "Antártica Chilena");
+        regiones.put("Región de Aysén del General Carlos Ibáñez del Campo", "Región de Aysén del General Carlos Ibáñez del Campo");
+        regiones.put("Región de Magallanes y de la Antártica Chilena", "Región de Magallanes y de la Antártica Chilena");
         regiones.put("Región Metropolitana de Santiago", "Región Metropolitana de Santiago");
 
         Map<String, String> map = new HashMap<String, String>();
@@ -194,8 +188,7 @@ public class ComunaBean {
         map.put("San Francisco de Mostazal", "San Francisco de Mostazal");
         map.put("San Vicente de Tagua Tagua", "San Vicente de Tagua Tagua");
         map.put("Santa Cruz", "Santa Cruz");
-        data.put("Región del Libertador General\n"
-                + "Bernardo O'Higgins", map);
+        data.put("Región del Libertador General Bernardo O'Higgins", map);
 
         map = new HashMap<String, String>();
         map.put("Cauquenes", "Cauquenes");
@@ -380,8 +373,7 @@ public class ComunaBean {
         map.put("O'Higgins", "O'Higgins");
         map.put("Río Ibáñez", "Río Ibáñez");
         map.put("Tortel", "Tortel");
-        data.put("Región de Aysén del General\n"
-                + "Carlos Ibáñez del Campo", map);
+        data.put("Región de Aysén del General Carlos Ibáñez del Campo", map);
 
         map = new HashMap<String, String>();
         map.put("Antártica", "Antártica");
@@ -395,8 +387,7 @@ public class ComunaBean {
         map.put("San Gregorio", "San Gregorio");
         map.put("Timaukel", "Timaukel");
         map.put("Torres del Paine", "Torres del Paine");
-        data.put("Región de Magallanes y de la\n"
-                + "Antártica Chilena", map);
+        data.put("Región de Magallanes y de la Antártica Chilena", map);
 
         map = new HashMap<String, String>();
         map.put("Alhué", "Alhué");

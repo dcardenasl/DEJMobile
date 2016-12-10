@@ -8,11 +8,11 @@
         <title>Facelet Title</title>
         <f:event type="preRenderView" listener="#{clienteBean.verificarSesionCliente()}"/>
     </h:head>
-        <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
-            <p:commandButton rendered="#{clienteBean.verificarSesionCliente()}" value="CERRAR SESION"  action="#{pasajeroBean.cerrarSesion()}" immediate="true"/>
-            
-            <p:link outcome="SolicitarPlan" value="Solicitar un Plan"></p:link><br/>
-            <p:link outcome="VerPlan" value="Ver mis Planes"></p:link>
-        </h:body>
+    <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
+        <p:commandButton value="CERRAR SESION"  action="#{pasajeroBean.cerrarSesion()}" immediate="true"/>
+
+        <p:link outcome="SolicitarPlan" value="Solicitar un Plan"></p:link><br/>
+        <p:link outcome="VerPlan" value="Ver mis Planes"></p:link>
+    </h:body>
 </html>
 

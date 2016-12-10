@@ -132,9 +132,9 @@ public class ClienteBean implements Serializable {
         Cliente c = clienteFacade.find(rut);
 
         if (rut != 0 && clave.equals(c.getClave())) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", c);;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", c);
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/index.xhtml");
             } catch (IOException ex) {
                 Logger.getLogger(ClienteBean.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -150,7 +150,7 @@ public class ClienteBean implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             Cliente c = (Cliente) context.getExternalContext().getSessionMap().get("cliente");
             if (c == null) {
-                context.getExternalContext().redirect("logueo.xhtml");
+                context.getExternalContext().redirect("faces/logueo.xhtml");
             }
         } catch (Exception e) {
             //log

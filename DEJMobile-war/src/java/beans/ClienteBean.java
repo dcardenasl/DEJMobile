@@ -162,4 +162,22 @@ public class ClienteBean implements Serializable {
         return "index";
     }
 
+    public String signIn()
+    {
+        Cliente c = new Cliente();
+        c.setRut(rut);
+        c.setClave(clave);
+        c.setNombre(nombre);
+        c.setApellidoPaterno(apellidoPaterno);
+        c.setApellidoMaterno(apellidoMaterno);
+        c.setDireccion(direccion);
+        c.setNumeracion(numeracion);
+        c.setComuna(comunaBean.getComuna());
+        c.setTelefono(telefono);
+        this.clienteFacade.create(c);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente creado exitosamente!!!"));
+        return "ClienteBean";
+    }
+      
+    
 }

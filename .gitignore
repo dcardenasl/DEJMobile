@@ -4,3 +4,6 @@
 /DEJMobile-war/build/
 /DEJMobile-ejb/build/
 /DEJMobile-ejb/dist/
+/dist/
+/build/
+/DEJMobile-war/dist/

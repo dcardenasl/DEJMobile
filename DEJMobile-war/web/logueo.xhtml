@@ -15,10 +15,7 @@
                 <h:graphicImage library="images" name="acceso.jpg" />
                 <br></br>
                 <p:panel id="login" header="Acceso" style="margin-bottom:20px; width: 600px;" >
-                    <!--<p:link outcome="Registro" value="Registrarse" style="margin-bottom: 20px;"/>
-                         <p:link outcome="index" value="Menú cliente (Enlace a la mala)"/>
-                     </h:panelGrid>
-                    -->
+
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="rut" value="RUT" />
                         <p:inputText id="username" value="#{clienteBean.rut}" required="true" label="username" />
@@ -30,8 +27,10 @@
                             <p:commandButton value="Login" update="msgs" actionListener="#{clienteBean.login}"
                                              oncomplete="handleLoginRequest(xhr, status, args)" />
                         </f:facet>  
+
                     </h:panelGrid>
                 </p:panel>
+                <p:link outcome="Registro" value="Registrarse" style="margin-bottom: 20px;"/>
             </center>
         </h:form>
         <script type="text/javascript">

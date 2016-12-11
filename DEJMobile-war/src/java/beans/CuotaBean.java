@@ -1,67 +1,60 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import pojos.Cuota;
 import services.CuotaFacadeLocal;
 
 /**
  *
- * @author Pelao
+ * @author Centro de Trabajo
  */
 @Named(value = "cuotaBean")
-@ManagedBean
-@ViewScoped
-public class CuotaBean {
+@SessionScoped
+public class CuotaBean implements Serializable {
 
     @EJB
     private CuotaFacadeLocal cuotaFacade;
 
     /**
-     * Creates a new instance of CuotaBean
+     * Creates a new instance of cuotaBean
      */
-    
-    private Map<String, String> descripcion;
+    private Map<String, String> cuotas;
     private int ID;
     private int precio;
-    private String nuevaDescripcion;
-    
+    private String descripcion;
     private Cuota cuota;
-    
+
     public CuotaBean() {
         cuota = new Cuota();
-        descripcion = new HashMap<String, String>();
-        descripcion.put("1 giga", "1 giga");
-        descripcion.put("2 gigas", "2 gigas");
-        descripcion.put("3 gigas", "3 gigas");
+        cuotas = new HashMap<String, String>();
+        cuotas.put("prueba", "prueba");
+    }
+
+    public Map<String, String> getCuotas() {
+        return cuotas;
     }
 
     public CuotaFacadeLocal getCuotaFacade() {
         return cuotaFacade;
     }
 
-    public void setCuotaFacade(CuotaFacadeLocal cuotaFacade) {
-        this.cuotaFacade = cuotaFacade;
+    public void setCuotas(Map<String, String> cuotas) {
+        this.cuotas = cuotas;
     }
 
-    public Map<String, String> getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(Map<String, String> descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -81,14 +74,6 @@ public class CuotaBean {
         this.precio = precio;
     }
 
-    public String getNuevaDescripcion() {
-        return nuevaDescripcion;
-    }
-
-    public void setNuevaDescripcion(String nuevaDescripcion) {
-        this.nuevaDescripcion = nuevaDescripcion;
-    }
-
     public Cuota getCuota() {
         return cuota;
     }
@@ -96,35 +81,31 @@ public class CuotaBean {
     public void setCuota(Cuota cuota) {
         this.cuota = cuota;
     }
-    
-    public String crear()
-    {
+
+    public String crear() {
         Cuota c = new Cuota();
-        c.setIdCuota(ID);
-        c.setDescripcion(nuevaDescripcion);
-        descripcion.put(nuevaDescripcion, nuevaDescripcion);
+        c.setDescripcion(descripcion);
+        cuotas.put(descripcion, descripcion);
         c.setPrecio(precio);
         this.cuotaFacade.create(c);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Nueva cuota creada exitosamente!!!"));
         return "CuotaBean";
     }
-    
-    public String eliminar()
-    {
+
+    public String eliminar() {
         Cuota c = cuotaFacade.find(cuota.getIdCuota());
         cuotaFacade.remove(c);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cuota Eliminada!!!"));
         return "CuotaBean";
     }
-    
-    public String actualizar()
-    {
+
+    public String actualizar() {
         Cuota c = cuotaFacade.find(cuota.getIdCuota());
-        c.setDescripcion(nuevaDescripcion);
+        c.setDescripcion(descripcion);
         c.setPrecio(precio);
         cuotaFacade.edit(c);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cuota actualizada!!!"));
         return "CuotaBean";
     }
-    
+
 }

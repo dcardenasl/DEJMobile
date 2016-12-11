@@ -9,8 +9,9 @@
         <f:event type="preRenderView" listener="#{clienteBean.verificarSesionCliente()}"/>
     </h:head>
     <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
-        <p:commandButton value="CERRAR SESION"  action="#{pasajeroBean.cerrarSesion()}" immediate="true"/>
-
+        <h:form>
+            <p:commandButton value="CERRAR SESION" id="CS" actionListener="#{clienteBean.cerrarSesion()}" ajax="false" />
+        </h:form>
         <p:link outcome="SolicitarPlan" value="Solicitar un Plan"></p:link><br/>
         <p:link outcome="VerPlan" value="Ver mis Planes"></p:link>
     </h:body>

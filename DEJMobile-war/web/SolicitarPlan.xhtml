@@ -16,7 +16,7 @@
                         <h:outputText value="Cuota " />
                         <p:selectOneMenu id="cuota" value="" style="width:150px">
                             <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="" />
+                            <f:selectItems value="#{cuotaBean.cuotas}" />
                         </p:selectOneMenu>
                         <h:outputText value="Minutos " />
                         <p:selectOneRadio id="minutos" value=""  layout="grid" columns="3">
@@ -25,7 +25,7 @@
                         <p:selectBooleanCheckbox value="#{solicitudBean.entrega}" />
                         <h:outputText value="Entrega del Chip en Domicilio"/>
 
-                        <p:link outcome="MenuCliente" value="Volver"></p:link><br/>
+                        <p:link outcome="index" value="Volver"></p:link><br/>
                         <p:commandButton value="Paso 2"/>
                     </h:panelGrid>
                 </p:panel>

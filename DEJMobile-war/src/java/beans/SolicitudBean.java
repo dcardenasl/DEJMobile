@@ -54,6 +54,9 @@ public class SolicitudBean implements Serializable {
     private Cuota cuota_idCuota;
     private Minutos minutos_idMinutos;
     private String mensaje;
+    
+    private int idMinutos;
+    private int idCuota;
 
     private Solicitud solicitud;
     private Cliente cliente;
@@ -236,5 +239,9 @@ public class SolicitudBean implements Serializable {
         hourdateFormat.format(date);
         return date;
         
+    }
+    
+    public String Paso2(){
+        return "ConfirmarPlan";
     }
 }

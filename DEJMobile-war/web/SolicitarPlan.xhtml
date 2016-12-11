@@ -14,19 +14,20 @@
                 <p:panel id="Plan" header="Plan" style="margin-top: 20px ;height:500px; width: 450px;">
                     <h:panelGrid columns="2" cellpadding="1">
                         <h:outputText value="Cuota " />
-                        <p:selectOneMenu id="cuota" value="" style="width:150px">
+                        <p:selectOneMenu id="cuota" value="#{solicitudBean.cuota}" style="width:150px">
                             <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{cuotaBean.cuotas}" />
                         </p:selectOneMenu>
                         <h:outputText value="Minutos " />
-                        <p:selectOneRadio id="minutos" value=""  layout="grid" columns="3">
-                            <f:selectItems value="" var="" itemLabel="" itemValue=""/>
-                        </p:selectOneRadio>
+                        <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos}" style="width:150px">
+                            <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{minutosBean.minutosMap}" />
+                        </p:selectOneMenu>
                         <p:selectBooleanCheckbox value="#{solicitudBean.entrega}" />
                         <h:outputText value="Entrega del Chip en Domicilio"/>
 
                         <p:link outcome="index" value="Volver"></p:link><br/>
-                        <p:commandButton value="Paso 2"/>
+                        <p:commandButton value="PASO 2" id="paso2" actionListener="#{solicitudBean.paso2}" ajax="false" />
                     </h:panelGrid>
                 </p:panel>
 

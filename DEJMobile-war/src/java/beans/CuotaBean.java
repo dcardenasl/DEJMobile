@@ -34,11 +34,14 @@ public class CuotaBean implements Serializable {
 
     public CuotaBean() {
         cuota = new Cuota();
-        cuotas = new HashMap<String, String>();
-        cuotas.put("prueba", "prueba");
+
     }
 
     public Map<String, String> getCuotas() {
+        cuotas = new HashMap<String, String>();
+        cuotas.put(this.cuotaFacade.find(1).getDescripcion(), this.cuotaFacade.find(1).getDescripcion());
+        cuotas.put(this.cuotaFacade.find(2).getDescripcion(), this.cuotaFacade.find(2).getDescripcion());
+        cuotas.put(this.cuotaFacade.find(3).getDescripcion(), this.cuotaFacade.find(3).getDescripcion());
         return cuotas;
     }
 

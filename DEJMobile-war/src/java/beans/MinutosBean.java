@@ -33,20 +33,15 @@ public class MinutosBean {
     /**
      * Creates a new instance of MinutosBean
      */
-  
-    private Map<String, String> descripcion;
+    private Map<String, String> minutosMap;
     private int ID;
     private int precio;
-    private String nuevaDescripcion;
-    
+    private String descripcion;
+
     private Minutos minutos;
-    
+
     public MinutosBean() {
         minutos = new Minutos();
-        descripcion = new HashMap<String, String>();
-        descripcion.put("150 minutos", "150 minutos");
-        descripcion.put("300 minutos", "300 minutos");
-        descripcion.put("500 minutos", "500 minutos");
     }
 
     public MinutosFacadeLocal getMinutosFacade() {
@@ -57,12 +52,16 @@ public class MinutosBean {
         this.minutosFacade = minutosFacade;
     }
 
-    public Map<String, String> getDescripcion() {
-        return descripcion;
+    public Map<String, String> getMinutosMap() {
+        minutosMap = new HashMap<String, String>();
+        minutosMap.put(this.minutosFacade.find(1).getDescripcion(), this.minutosFacade.find(1).getDescripcion());
+        minutosMap.put(this.minutosFacade.find(2).getDescripcion(), this.minutosFacade.find(2).getDescripcion());
+        minutosMap.put(this.minutosFacade.find(3).getDescripcion(), this.minutosFacade.find(3).getDescripcion());
+        return minutosMap;
     }
 
-    public void setDescripcion(Map<String, String> descripcion) {
-        this.descripcion = descripcion;
+    public void setMinutosMap(Map<String, String> minutosMap) {
+        this.minutosMap = minutosMap;
     }
 
     public int getID() {
@@ -89,44 +88,39 @@ public class MinutosBean {
         this.minutos = minutos;
     }
 
-    public String getNuevaDescripcion() {
-        return nuevaDescripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNuevaDescripcion(String nuevaDescripcion) {
-        this.nuevaDescripcion = nuevaDescripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
-    
-    
-    
-    public String crear()
-    {
+
+    public String crear() {
         Minutos m = new Minutos();
         m.setIdMinutos(ID);
-        m.setDescripcion(nuevaDescripcion);
-        descripcion.put(nuevaDescripcion, nuevaDescripcion);
+        m.setDescripcion(descripcion);
+        minutosMap.put(descripcion, descripcion);
         m.setPrecio(precio);
         this.minutosFacade.create(m);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Nueva cantidad de minutos creada exitosamente!!!"));
         return "MinutosBean";
     }
-    
-    public String eliminar()
-    {
+
+    public String eliminar() {
         Minutos m = minutosFacade.find(minutos.getIdMinutos());
         minutosFacade.remove(m);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cantidad de minutos Eliminada!!!"));
         return "MinutosBean";
     }
-    
-    public String actualizar()
-    {
+
+    public String actualizar() {
         Minutos m = minutosFacade.find(minutos.getIdMinutos());
-        m.setDescripcion(nuevaDescripcion);
+        m.setDescripcion(descripcion);
         m.setPrecio(precio);
         minutosFacade.edit(m);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cantidad de minutos actualizada!!!"));
         return "MinutosBean";
     }
-    
+
 }

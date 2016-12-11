@@ -8,12 +8,16 @@
     </h:head>
     <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
         <center>
-        <h1>SOLICITAR PLAN :: PASO 2</h1>
-        <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
-        
-        <p:link outcome="SolicitarPlan" value="Volver"></p:link><br/>
-        <p:commandButton value="Solicitar Plan" update="mensaje"/>
-        <p:link outcome="index" value="Ir al menú"></p:link>
+            <h1>SOLICITAR PLAN :: PASO 2</h1>
+            <h:form>
+
+
+                <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
+
+                <p:link outcome="SolicitarPlan" value="Volver"></p:link><br/>
+                <p:commandButton value="Solicitar Plan" update="mensaje"/>
+                <p:link outcome="index" value="Ir al menú"></p:link>
+            </h:form>
         </center>
     </h:body>
 </html>

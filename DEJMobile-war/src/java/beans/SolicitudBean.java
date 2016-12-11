@@ -242,6 +242,7 @@ public class SolicitudBean implements Serializable {
     }
     
     public String Paso2(){
+        
         return "ConfirmarPlan";
     }
 }

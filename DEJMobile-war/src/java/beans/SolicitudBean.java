@@ -10,10 +10,12 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import pojos.Cliente;
 import pojos.Cuota;
 import pojos.Minutos;
@@ -54,7 +56,7 @@ public class SolicitudBean implements Serializable {
     private Cuota cuota_idCuota;
     private Minutos minutos_idMinutos;
     private String mensaje;
-    
+
     private int idMinutos;
     private int idCuota;
 
@@ -63,11 +65,22 @@ public class SolicitudBean implements Serializable {
     private Cuota cuota;
     private Minutos minutos;
 
+    private List<Cuota> cuotas;
+    private List<Minutos> minutosList;
+
     public SolicitudBean() {
         solicitud = new Solicitud();
         cliente = new Cliente();
         cuota = new Cuota();
         minutos = new Minutos();
+    }
+
+    public List<Cuota> getCuotas() {
+        return cuotaFacade.findAll();
+    }
+
+    public List<Minutos> getMinutosList() {
+        return minutosFacade.findAll();
     }
 
     public ClienteFacadeLocal getClienteFacade() {
@@ -238,11 +251,23 @@ public class SolicitudBean implements Serializable {
         DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         hourdateFormat.format(date);
         return date;
-        
+
     }
-    
-    public String Paso2(){
-        
-        return "ConfirmarPlan";
+
+
+    public String Paso2(ActionEvent actionEvent) {
+        if (this.cuota != null && this.minutos != null) {
+            addMensaje("Aprobado!!");
+            return "ConfirmarPlan";
+        } else {
+            addMensaje("Rechazado!!");
+            return "SolicitarPlan";
+        }
+
+    }
+
+    public void addMensaje(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }

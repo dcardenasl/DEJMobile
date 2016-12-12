@@ -11,27 +11,23 @@
         <center>
             <h1>ARMA TU PLAN :: PASO 1</h1>
             <h:form id="form">
+                <p:growl id="growl" life="2000" />
                 <p:panel id="Plan" header="Plan" style="margin-top: 20px ;height:500px; width: 450px;">
                     <h:panelGrid columns="2" cellpadding="1">
                         <p:outputLabel for="cuota" value="Cuota: " />
-                        <p:selectOneMenu id="cuota" value="#{solicitudBean.cuota.idCuota}" style="width:125px">
-                            <f:selectItem itemLabel="Seleccionar" itemValue="" />
-                            <f:selectItem itemLabel="5 Gigas" itemValue="1" />
-                            <f:selectItem itemLabel="7 Gigas" itemValue="2" />
-                            <f:selectItem itemLabel="10 Gigas" itemValue="3" />
+                        <p:selectOneMenu id="cuota" value="#{solicitudBean.cuota.idCuota}" style="width:125px" required="true">
+                            <f:selectItems value="#{solicitudBean.cuotas}" var="c" itemLabel="#{c.descripcion} - $#{c.precio}" itemValue="#{c.idCuota}" />
                         </p:selectOneMenu>
                         <p:outputLabel for="minutos" value="Minutos: " />
-                        <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos.idMinutos}" style="width:125px">
-                            <f:selectItem itemLabel="Seleccionar" itemValue="" />
-                            <f:selectItem itemLabel="800" itemValue="1" />
-                            <f:selectItem itemLabel="2000" itemValue="2" />
-                            <f:selectItem itemLabel="3000" itemValue="3" />
+                        <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos.idMinutos}" style="width:125px" required="true">
+                            <f:selectItems value="#{solicitudBean.minutosList}" var="m" itemLabel="#{m.descripcion} - $#{m.precio}" itemValue="#{m.idMinutos}" />
                         </p:selectOneMenu>
-                        <p:selectBooleanCheckbox value="#{solicitudBean.entrega}" />
+                        <p:selectBooleanCheckbox value="#{solicitudBean.entrega}"/>
                         <h:outputText value="Entrega del Chip en Domicilio"/>
-
-                        <p:link outcome="index" value="Volver"></p:link><br/>
-                        <p:button outcome="ConfirmarPlan" value="Paso 2"/>
+                        <p:link outcome="index" value="Volver">
+                        </p:link>
+                        <br/>
+                        <p:commandButton value="Paso 2" id="paso2" update="growl" action="ConfirmarPlan.xhtml?faces-redirect=true" ajax="false" />
                     </h:panelGrid>
                 </p:panel>
 

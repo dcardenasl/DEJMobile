@@ -10,7 +10,11 @@
     </h:head>
     <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
         <h:form>
-            <p:commandButton value="CERRAR SESION" id="CS" actionListener="#{clienteBean.cerrarSesion()}" ajax="false" />
+            <p:growl id="messages"/>            
+            <p:panelGrid columns="2" style="width: 100vw;">
+                <h:outputText value="Bienvenido #{clienteBean.esteCliente.nombre} #{clienteBean.esteCliente.apellidoPaterno}"/>
+                <p:commandLink value="Cerrar Sesion" id="cerrarSesion" action="#{clienteBean.cerrarSesion()}" ajax="false" style="float: right;"/>
+            </p:panelGrid>
         </h:form>
         <p:link outcome="SolicitarPlan" value="Solicitar un Plan"></p:link><br/>
         <p:link outcome="VerPlan" value="Ver mis Planes"></p:link>

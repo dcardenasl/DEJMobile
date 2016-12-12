@@ -50,6 +50,7 @@ public class ClienteBean implements Serializable {
     
     private ComunaBean comunaBean;
 
+    
     public ClienteBean() {
         cliente = new Cliente();
     }
@@ -136,6 +137,10 @@ public class ClienteBean implements Serializable {
 
     public List<Cliente> getPasajeros() {
         return clienteFacade.findAll();
+    }
+    
+    public Cliente getEsteCliente(){
+        return clienteFacade.find(rut);
     }
 
     public void login(ActionEvent event) {

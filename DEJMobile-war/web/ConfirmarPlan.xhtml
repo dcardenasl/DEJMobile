@@ -9,13 +9,18 @@
     <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
         <center>
             <h1>SOLICITAR PLAN :: PASO 2</h1>
+            <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
             <h:form>
+                <h:outputText value="El plan solicitado es el siguiente: "/>
+                <h:outputText value="Cuota: }"/>
+                <h:outputText value="Minutos: "/>
+                <h:outputText value="Entrega del Chip: "/>
+                <h:outputText value="Precio total: "/>
 
-
-                <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
-
-                <p:link outcome="SolicitarPlan" value="Volver"></p:link><br/>
+                <br/><br/><br/><br/><br/><br/>
                 <p:commandButton value="Solicitar Plan" update="mensaje"/>
+                <br/><br/><br/><br/>
+                <p:link outcome="SolicitarPlan" value="Volver"></p:link><br/>
                 <p:link outcome="index" value="Ir al menú"></p:link>
             </h:form>
         </center>

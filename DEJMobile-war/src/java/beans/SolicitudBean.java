@@ -69,7 +69,7 @@ public class SolicitudBean implements Serializable {
 
     private List<Cuota> cuotas;
     private List<Minutos> minutosList;
-    
+
     private List<Solicitud> solicitudesMias;
 
     public SolicitudBean() {
@@ -86,8 +86,6 @@ public class SolicitudBean implements Serializable {
     public void setSolicitudesMias(List<Solicitud> solicitudesMias) {
         this.solicitudesMias = solicitudesMias;
     }
-
-    
 
     public List<Cuota> getCuotas() {
         return cuotaFacade.findAll();
@@ -250,15 +248,6 @@ public class SolicitudBean implements Serializable {
         return "SolicitudBean";
     }
 
-    public void entrega() {
-        Cliente c = clienteFacade.find(cliente.getRut());
-        if (entrega) {
-            mensaje = c.getDireccion() + " n° " + c.getNumeracion();
-        } else {
-            mensaje = "Retirar en oficina";
-        }
-    }
-
     public Date obtenerDiayHora() {
         Date date = new Date();
 
@@ -294,5 +283,9 @@ public class SolicitudBean implements Serializable {
     public void addMensaje(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void sumarPrecios() {
+        total = cuota_idCuota.getPrecio() + minutos_idMinutos.getPrecio();
     }
 }

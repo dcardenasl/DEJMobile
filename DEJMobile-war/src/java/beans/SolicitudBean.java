@@ -14,6 +14,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import pojos.Cliente;
@@ -30,6 +31,7 @@ import services.SolicitudFacadeLocal;
  * @author Pelao
  */
 @Named(value = "solicitudBean")
+@ManagedBean
 @SessionScoped
 public class SolicitudBean implements Serializable {
 
@@ -67,6 +69,8 @@ public class SolicitudBean implements Serializable {
 
     private List<Cuota> cuotas;
     private List<Minutos> minutosList;
+    
+    private List<Solicitud> solicitudesMias;
 
     public SolicitudBean() {
         solicitud = new Solicitud();
@@ -74,6 +78,16 @@ public class SolicitudBean implements Serializable {
         cuota = new Cuota();
         minutos = new Minutos();
     }
+
+    public List<Solicitud> getSolicitudesMias() {
+        return solicitudesMias;
+    }
+
+    public void setSolicitudesMias(List<Solicitud> solicitudesMias) {
+        this.solicitudesMias = solicitudesMias;
+    }
+
+    
 
     public List<Cuota> getCuotas() {
         return cuotaFacade.findAll();
@@ -254,7 +268,6 @@ public class SolicitudBean implements Serializable {
 
     }
 
-
     public String Paso2(ActionEvent actionEvent) {
         if (this.cuota != null && this.minutos != null) {
             addMensaje("Aprobado!!");
@@ -264,6 +277,18 @@ public class SolicitudBean implements Serializable {
             return "SolicitarPlan";
         }
 
+    }
+
+    public List<Solicitud> MisSolicitudes(int rut) {
+        List<Solicitud> solicitudes = this.solicitudFacade.findAll();
+        solicitudesMias = this.solicitudFacade.findAll();
+        solicitudesMias.removeAll(solicitudesMias);
+        for (Solicitud s : solicitudes) {
+            if (s.getClienterut().getRut() == rut) {
+                solicitudesMias.add(s);
+            }
+        }
+        return solicitudesMias;
     }
 
     public void addMensaje(String summary) {

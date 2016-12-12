@@ -12,32 +12,32 @@
         <h1>MIS PLANES</h1>
         <br></br>
         <h:form id="planes">
-            <p:dataTable value="" var="">
+            <p:dataTable value="#{solicitudBean.MisSolicitudes(clienteBean.rut)}" var="ms">
                 <p:column headerText="Código">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{ms.codigo}"/>
                 </p:column>
                 <p:column headerText="Gigas">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{ms.cuotaidCuota.descripcion}"/>
                 </p:column>
                 <p:column headerText="Minutos">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{ms.minutosidMinutos.descripcion}"/>
                 </p:column>
                 <p:column headerText="Entrega de Chip">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{ms.entrega eq true ? (ms.clienterut.direccion.concat(' #').concat(ms.clienterut.numeracion)): 'Retiro en sucursal' }"/>
                 </p:column>
                 <p:column headerText="Teléfono">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{ms.clienterut.telefono}"/>
                 </p:column>
                 <p:column headerText="Comuna">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{ms.clienterut.comuna}"/>
                 </p:column>
                 <p:column headerText="Ingreso">
-                    <h:outputText value="">
+                    <h:outputText value="#{ms.fechaHora}">
                         <f:convertDateTime type="date" locale="es" dateStyle="long"/>
                     </h:outputText>
                 </p:column>
                 <p:column headerText="Total">
-                    <h:outputText value=""/>
+                    <h:outputText value="$#{ms.total}"/>
                 </p:column>
             </p:dataTable>
             

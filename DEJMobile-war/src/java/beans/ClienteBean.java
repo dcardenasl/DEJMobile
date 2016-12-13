@@ -20,6 +20,7 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.context.RequestContext;
 import pojos.Cliente;
 import services.ClienteFacadeLocal;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -31,7 +32,6 @@ public class ClienteBean implements Serializable {
 
     @EJB
     private ClienteFacadeLocal clienteFacade;
-    
 
     /**
      * Creates a new instance of ClienteBean
@@ -48,10 +48,9 @@ public class ClienteBean implements Serializable {
     private int telefono;
     boolean loggedIn = false;
     private Cliente cliente;
-    
+
     private ComunaBean comunaBean;
 
-    
     public ClienteBean() {
         cliente = new Cliente();
     }
@@ -79,8 +78,6 @@ public class ClienteBean implements Serializable {
     public void setDv(String dv) {
         this.dv = dv;
     }
-    
-    
 
     public String getClave() {
         return clave;
@@ -149,15 +146,15 @@ public class ClienteBean implements Serializable {
     public List<Cliente> getPasajeros() {
         return clienteFacade.findAll();
     }
-    
-    public Cliente getEsteCliente(){
+
+    public Cliente getEsteCliente() {
         return clienteFacade.find(rut);
     }
-    
-    public boolean confirmarRut(){
+
+    public boolean confirmarRut() {
         int count = 2, suma = 0, digitoCalculado;
         String digitoFinal;
-        
+
         try {
             //13139029-1
             for (int i = String.valueOf(rut).length() - 1; i >= 0; i--) {
@@ -188,15 +185,15 @@ public class ClienteBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("RUT INCORRECTO."));
             return false;
         }
-        
+
         return true;
     }
 
     public void login(ActionEvent event) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage message = null;
-
         Cliente c = clienteFacade.find(rut);
+        clave = DigestUtils.md5Hex(clave);
 
         if (c != null && clave != null && clave.equals(c.getClave()) && confirmarRut()) {
             loggedIn = true;
@@ -241,11 +238,12 @@ public class ClienteBean implements Serializable {
         return "logueo";
     }
 
-    public String signIn()
-    {
+    public String signIn() {
+        String textoEncriptadoConMD5 = DigestUtils.md5Hex(clave);
+
         Cliente c = new Cliente();
         c.setRut(rut);
-        c.setClave(clave);
+        c.setClave(textoEncriptadoConMD5);
         c.setNombre(nombre);
         c.setApellidoPaterno(apellidoPaterno);
         c.setApellidoMaterno(apellidoMaterno);
@@ -257,6 +255,5 @@ public class ClienteBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente creado exitosamente!!!"));
         return "ClienteBean";
     }
-      
-    
+
 }

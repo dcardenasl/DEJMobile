@@ -35,14 +35,14 @@
                         <p:inputText value="#{clienteBean.numeracion}" required="true" requiredMessage="Debe ingresar una numeración"/>
 
                         <p:outputLabel for="region" value="Región: " />
-                        <p:selectOneMenu id="region" value="#{comunaBean.region}" style="width:150px">
+                        <p:selectOneMenu id="region" value="#{comunaBean.region}" style="width:150px" required="true" requiredMessage="Debe seleccionar una region">
                             <p:ajax listener="#{comunaBean.cuandoSeCambiaLaRegion()}" update="comuna" />
                             <f:selectItem itemLabel="Seleccione una Región" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{comunaBean.regiones}" />
                         </p:selectOneMenu>
 
                         <p:outputLabel for="comuna" value="Comuna: " />
-                        <p:selectOneMenu id="comuna" value="#{clienteBean.comuna}" style="width:150px">
+                        <p:selectOneMenu id="comuna" value="#{clienteBean.comuna}" style="width:150px" required="true" requiredMessage="Debe seleccionar una comuna" >
                             <f:selectItem itemLabel="Seleccione una Comuna" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{comunaBean.comunas}" />
                         </p:selectOneMenu>
@@ -50,7 +50,7 @@
                         <h:outputText value="Teléfono " />
                         <p:inputText value="#{clienteBean.telefono}" required="true" requiredMessage="Debe ingresar un teléfono"/>
                         <p:link outcome="logueo" value="Volver"></p:link>
-                        <p:commandButton actionListener="#{clienteBean.signIn()}" value="Registrar" update="mensaje"/>
+                        <p:commandButton action="#{clienteBean.signIn()}" value="Registrar" update="mensaje"/>
                     </h:panelGrid>
                 </p:panel>
 

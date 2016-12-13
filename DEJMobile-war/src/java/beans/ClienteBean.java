@@ -185,7 +185,7 @@ public class ClienteBean implements Serializable {
                 return false;
             }
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("RUT DEBE SER NUMERICO."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("RUT INCORRECTO."));
             return false;
         }
         

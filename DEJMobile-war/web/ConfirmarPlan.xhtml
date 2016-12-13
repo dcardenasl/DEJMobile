@@ -2,31 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
-        <link rel="stylesheet" type="text/css" href="resources/CSS/todo.css" media="screen" />
     </h:head>
     <h:body style="background-image: url('../resources/images/fondo2.jpg');">
+        <ui:include src="includes/menu.xhtml"/> <!-- Para incluir el menu -->
         <center>
             <h1>ARMA TU PLAN </h1>
             <h2> → PASO 2</h2>
             <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
             <h:form class="" >
                 <p:panel id="Plan"  style="margin-top:5px ;height:200px; width: 370px;">
-                <h:outputText value="El plan solicitado es el siguiente: "/> <br/>
-                <h:outputText value="Cuota: #{solicitudBean.descripcionCuota()}"/> <br/>
-                <h:outputText value="Minutos: #{solicitudBean.descripcionMinutos()}"/> <br/>
-                <h:outputText value="Entrega: #{solicitudBean.entrega eq true ? (solicitudBean.esteCliente(clienteBean.rut).direccion.concat(' #').concat(solicitudBean.esteCliente(clienteBean.rut).numeracion)): 'Retiro en sucursal' }"/> <br/>
-                <h:outputText value="Precio total: $#{solicitudBean.sumarPrecios()}"/>
+                    <h:outputText value="El plan solicitado es el siguiente: "/> <br/>
+                    <h:outputText value="Cuota: #{solicitudBean.descripcionCuota()}"/> <br/>
+                    <h:outputText value="Minutos: #{solicitudBean.descripcionMinutos()}"/> <br/>
+                    <h:outputText value="Entrega: #{solicitudBean.entrega eq true ? (solicitudBean.esteCliente(clienteBean.rut).direccion.concat(' #').concat(solicitudBean.esteCliente(clienteBean.rut).numeracion)): 'Retiro en sucursal' }"/> <br/>
+                    <h:outputText value="Precio total: $#{solicitudBean.sumarPrecios()}"/>
                 </p:panel>
                 <br/><br/>
-                <p:commandButton value="Solicitar Plan" update="mensaje" action="#{solicitudBean.crearSolicitud(clienteBean.rut)}" ajax="false"/>
-                
+
+
                 <p:link class="btnn" style="color: #323133" outcome="SolicitarPlan" value="Volver"></p:link>
-                
-                <p:link class="btnn" style="color: #323133" outcome="index" value="Ir al menú"></p:link>
-              
+                <p:commandButton value="Solicitar Plan" update="mensaje" action="#{solicitudBean.crearSolicitud(clienteBean.rut)}" ajax="false"/>
+                <p:link class="btnn" style="color: #323133" outcome="index" value="Ir al Inicio"></p:link>
+
             </h:form>
         </center>
     </h:body>

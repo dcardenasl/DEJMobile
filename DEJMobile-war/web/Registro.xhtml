@@ -13,12 +13,12 @@
             <h1>DEJ MOVILE :: REGISTRO</h1>
             <h:form id="form">
                 <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
-                <p:panel id="Registrar" header="REGISTRO" style="margin-top: 20px ;height:530px; width: 800px;">
+                <p:panel id="Registrar" header="REGISTRO" style="margin-top: 20px ;height:530px; width: 650px;">
                     <h:panelGrid columns="4" cellpadding="1">
                         <h:outputText value="Rut " />
                         <p:inputText value="#{clienteBean.rut}" required="true" requiredMessage="Debe ingresar un rut"/>
-                        D.V -
-                        <p:inputText id="dv" value="#{clienteBean.dv}" required="true" label="dv" size="1" />
+                        -
+                        <p:inputText id="dv" value="#{clienteBean.dv}" required="true" label="dv" size="1" style="margin-left: 20px" requiredMessage="Debe ingresar un codigo verificador de su RUT"/>
                         
                         <h:outputText value="Clave " />
                         <p:password id="clave1" value="#{clienteBean.clave}" required="true" 
@@ -55,7 +55,7 @@
                         <h:outputText/>
 
                         <p:outputLabel for="region" value="Región: " />
-                        <p:selectOneMenu id="region" value="#{comunaBean.region}" style="width:150px" required="true" requiredMessage="Debe seleccionar una region">
+                        <p:selectOneMenu id="region" value="#{comunaBean.region}" style="width:180px" required="true" requiredMessage="Debe seleccionar una region" autoWidth="false" >
                             <p:ajax listener="#{comunaBean.cuandoSeCambiaLaRegion()}" update="comuna" />
                             <f:selectItem itemLabel="Seleccione una Región" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{comunaBean.regiones}" />
@@ -64,7 +64,7 @@
                         <h:outputText/>
 
                         <p:outputLabel for="comuna" value="Comuna: " />
-                        <p:selectOneMenu id="comuna" value="#{clienteBean.comuna}" style="width:150px" required="true" requiredMessage="Debe seleccionar una comuna" >
+                        <p:selectOneMenu id="comuna" value="#{clienteBean.comuna}" style="width:180px" autoWidth="false" required="true" requiredMessage="Debe seleccionar una comuna" >
                             <f:selectItem itemLabel="Seleccione una Comuna" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{comunaBean.comunas}" />
                         </p:selectOneMenu>

@@ -15,7 +15,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import pojos.Cliente;
 import pojos.Cuota;
 import pojos.Minutos;
@@ -53,20 +52,11 @@ public class SolicitudBean implements Serializable {
     private boolean entrega;
     private int total;
     private Date fechaHora;
-    private Cuota cuota_idCuota;
-    private Minutos minutos_idMinutos;
-    private String mensaje;
-
-    private int idMinutos;
-    private int idCuota;
 
     private Solicitud solicitud;
     private Cliente cliente;
     private Cuota cuota;
     private Minutos minutos;
-
-    private List<Cuota> cuotas;
-    private List<Minutos> minutosList;
 
     private List<Solicitud> solicitudesMias;
 
@@ -157,21 +147,6 @@ public class SolicitudBean implements Serializable {
         this.fechaHora = fechaHora;
     }
 
-    public Cuota getCuota_idCuota() {
-        return cuota_idCuota;
-    }
-
-    public void setCuota_idCuota(Cuota cuota_idCuota) {
-        this.cuota_idCuota = cuota_idCuota;
-    }
-
-    public Minutos getMinutos_idMinutos() {
-        return minutos_idMinutos;
-    }
-
-    public void setMinutos_idMinutos(Minutos minutos_idMinutos) {
-        this.minutos_idMinutos = minutos_idMinutos;
-    }
 
     public Solicitud getSolicitud() {
         return solicitud;
@@ -242,7 +217,6 @@ public class SolicitudBean implements Serializable {
         s.setEntrega(entrega);
         s.setTotal(this.sumarPrecios());
         s.setFechaHora(Date.from(instant));
-        s.setClienterut(clienteFacade.find(cliente.getRut()));
         s.setMinutosidMinutos(minutosFacade.find(minutos.getIdMinutos()));
         s.setCuotaidCuota(cuotaFacade.find(cuota.getIdCuota()));
         solicitudFacade.edit(s);

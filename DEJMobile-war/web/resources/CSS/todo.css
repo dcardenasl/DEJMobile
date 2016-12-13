@@ -126,7 +126,7 @@ transform: rotate(360deg);
 .as li { 
     float: left; 
     margin:10px; 
-    border-right:100px solid #333; 
+    border-right:60px solid #333; 
 
 } 
 

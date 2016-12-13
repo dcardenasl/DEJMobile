@@ -15,6 +15,7 @@
             <p:growl id="messages"/>  
             <ul>
                 <li><h2><h:outputText class="active" style="color:white" value="Bienvenido #{clienteBean.esteCliente.nombre} #{clienteBean.esteCliente.apellidoPaterno} #{clienteBean.esteCliente.apellidoMaterno}"/></h2></li> 
+                <li><p:link  outcome="index" value="Inicio"></p:link></li>
                 <li><p:link  outcome="SolicitarPlan" value="Solicitar un Plan"></p:link></li>
                 <li><p:link outcome="VerPlan" value="Ver mis Planes"></p:link></li>
                 <li><p:commandLink  value="Cerrar Sesion" id="cerrarSesion" action="#{clienteBean.cerrarSesion()}" ajax="false" /></li> 

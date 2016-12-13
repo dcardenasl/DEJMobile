@@ -5,23 +5,28 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
+        <link rel="stylesheet" type="text/css" href="resources/CSS/todo.css" media="screen" />
     </h:head>
     <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
         <center>
-            <h1>SOLICITAR PLAN :: PASO 2</h1>
+            <h1>ARMA TU PLAN </h1>
+            <h2> → PASO 2</h2>
             <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
-            <h:form>
+            <h:form class="" >
+                <p:panel id="Plan"  style="margin-top:5px ;height:200px; width: 200px;">
                 <h:outputText value="El plan solicitado es el siguiente: "/> <br/>
                 <h:outputText value="Cuota: #{solicitudBean.descripcionCuota()}"/> <br/>
                 <h:outputText value="Minutos: #{solicitudBean.descripcionMinutos()}"/> <br/>
                 <h:outputText value="Entrega: #{solicitudBean.entrega eq true ? (solicitudBean.esteCliente(clienteBean.rut).direccion.concat(' #').concat(solicitudBean.esteCliente(clienteBean.rut).numeracion)): 'Retiro en sucursal' }"/> <br/>
                 <h:outputText value="Precio total: $#{solicitudBean.sumarPrecios()}"/>
-
-                <br/><br/><br/><br/><br/><br/>
+                </p:panel>
+                <br/><br/>
                 <p:commandButton value="Solicitar Plan" update="mensaje" action="#{solicitudBean.crearSolicitud(clienteBean.rut)}" ajax="false"/>
-                <br/><br/><br/><br/>
-                <p:link outcome="SolicitarPlan" value="Volver"></p:link><br/>
-                <p:link outcome="index" value="Ir al menú"></p:link>
+                
+                <p:link class="btnn" style="color: #323133" outcome="SolicitarPlan" value="Volver"></p:link>
+                
+                <p:link class="btnn" style="color: #323133" outcome="index" value="Ir al menú"></p:link>
+              
             </h:form>
         </center>
     </h:body>

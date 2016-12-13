@@ -8,7 +8,22 @@ and open the template in the editor.
     Author     : Romanet
 */
 
+h1,h2{
+    color: #323133;
+    font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
+    letter-spacing: -1px;
+    text-decoration: none; 
+    text-shadow: 1px 1px #fff, 0 0 #0e0e0e, 2px 3px 1px #e3e3e3; 
+    text-transform: none; 
+    word-spacing: -2px;
+    text-shadow: 3px 1px 1px rgba(126, 126, 124, 1);
+}
+    
 
+.ppa{
+    margin: 100px;
+    padding: 10px 20px 10px 20px; 
+}
 
 .btn {
     background: #3498db; 
@@ -60,7 +75,7 @@ and open the template in the editor.
     text-decoration: none; 
 }
 
-ul { 
+.as ul { 
     list-style-type: none; 
     margin: 0px; 
     padding:0px; 
@@ -75,14 +90,14 @@ ul {
 
 }
 
-li { 
+.as li { 
     float: left; 
     margin:10px; 
     border-right:100px solid #333; 
 
 } 
 
-li a { 
+.as li a { 
     display: block; 
     color: white; 
     text-align: center; 
@@ -94,14 +109,14 @@ li a {
 
 
 /* Change the link color to #111 (black) on hover */ 
-li a:hover { 
+.as li a:hover { 
     background-color: #111; 
 } 
 
-li a:hover:not(.active) { 
+.as li a:hover:not(.active) { 
     background-color: #111; 
 } 
-.active { 
+.as active { 
 
     padding: 60px; 
     text-align:center; 

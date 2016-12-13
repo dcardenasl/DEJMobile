@@ -6,12 +6,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Ver Planes</title>
+        <link rel="stylesheet" type="text/css" href="resources/CSS/todo.css" media="screen" />
     </h:head>
     <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
         <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
+        <center>
         <h1>MIS PLANES</h1>
-        <br></br>
+        </center>
+        <br>
         <h:form id="planes">
             <p:dataTable value="#{solicitudBean.MisSolicitudes(clienteBean.rut)}" var="ms">
                 <p:column headerText="Código">
@@ -49,6 +51,7 @@
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
+
             
             <p:dialog header="Editar Solicitud" widgetVar="dialogo" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="panelEditar" style="text-align:center;">
@@ -75,8 +78,9 @@
                 </p:outputPanel>
             </p:dialog>
             
-            <br></br>
-            <p:link outcome="index" value="Volver"></p:link>
+            <br>
+            <p:link class="btnn" style="color: #000000" outcome="index" value="Volver"></p:link>
+
         </h:form>
         
         <script type="text/javascript">

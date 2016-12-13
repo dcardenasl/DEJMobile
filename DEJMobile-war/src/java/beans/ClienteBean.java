@@ -195,7 +195,7 @@ public class ClienteBean implements Serializable {
 
         if (c != null && clave != null && clave.equals(c.getClave()) && confirmarRut()) {
             loggedIn = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", c.getNombre() + " " + c.getApellidoPaterno());
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido(a) ", c.getNombre() + " " + c.getApellidoPaterno());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", c);
             FacesContext.getCurrentInstance().addMessage(null, message);
             context.addCallbackParam("loggedIn", loggedIn);
@@ -239,23 +239,29 @@ public class ClienteBean implements Serializable {
 
     public String signIn() {
         try {
-            String textoEncriptadoConMD5 = DigestUtils.md5Hex(clave);
-            Cliente c = new Cliente();
-            c.setRut(rut);
-            c.setClave(textoEncriptadoConMD5);
-            c.setNombre(nombre);
-            c.setApellidoPaterno(apellidoPaterno);
-            c.setApellidoMaterno(apellidoMaterno);
-            c.setDireccion(direccion);
-            c.setNumeracion(numeracion);
-            c.setComuna(comuna);
-            c.setTelefono(telefono);
-            this.clienteFacade.create(c);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente creado exitosamente!!!", "Ingrese con su rut y clave"));
-            return "logueo";
+            if (this.clienteFacade.find(rut) != null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Usuario ya creado"));
+                return "Registro";
+            } else {
+                String textoEncriptadoConMD5 = DigestUtils.md5Hex(clave);
+                Cliente c = new Cliente();
+                c.setRut(rut);
+                c.setClave(textoEncriptadoConMD5);
+                c.setNombre(nombre);
+                c.setApellidoPaterno(apellidoPaterno);
+                c.setApellidoMaterno(apellidoMaterno);
+                c.setDireccion(direccion);
+                c.setNumeracion(numeracion);
+                c.setComuna(comuna);
+                c.setTelefono(telefono);
+                this.clienteFacade.create(c);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente creado exitosamente!!!", "Ingrese con su rut y clave"));
+                return "logueo";
+            }
+
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Vuelva a ingresar los datos"));
-            return "logueo";
+            return "Registro";
         }
 
     }

@@ -37,6 +37,7 @@ public class ClienteBean implements Serializable {
      * Creates a new instance of ClienteBean
      */
     private int rut;
+    private String dv;
     private String clave;
     private String nombre;
     private String apellidoPaterno;
@@ -70,6 +71,16 @@ public class ClienteBean implements Serializable {
     public void setRut(int rut) {
         this.rut = rut;
     }
+
+    public String getDv() {
+        return dv;
+    }
+
+    public void setDv(String dv) {
+        this.dv = dv;
+    }
+    
+    
 
     public String getClave() {
         return clave;
@@ -142,6 +153,44 @@ public class ClienteBean implements Serializable {
     public Cliente getEsteCliente(){
         return clienteFacade.find(rut);
     }
+    
+    public boolean confirmarRut(){
+        int count = 2, suma = 0, digitoCalculado;
+        String digitoFinal;
+        
+        try {
+            //13139029-1
+            for (int i = String.valueOf(rut).length() - 1; i >= 0; i--) {
+                char r = String.valueOf(rut).charAt(i); // '9'
+                String n = String.valueOf(r);
+                int numero = Integer.parseInt(n) * count;
+                suma += numero;
+                count++;
+                if (count == 8) {
+                    count = 2;
+                }
+            }
+            //paso e y f
+            digitoCalculado = 11 - suma % 11;
+            if (digitoCalculado == 10) {
+                digitoFinal = "K";
+            } else if (digitoCalculado == 11) {
+                digitoFinal = "0";
+            } else {
+                digitoFinal = String.valueOf(digitoCalculado);
+            }
+
+            if (!digitoFinal.equalsIgnoreCase(dv)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("RUT NO VALIDO."));
+                return false;
+            }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("RUT DEBE SER NUMERICO."));
+            return false;
+        }
+        
+        return true;
+    }
 
     public void login(ActionEvent event) {
         RequestContext context = RequestContext.getCurrentInstance();
@@ -149,7 +198,7 @@ public class ClienteBean implements Serializable {
 
         Cliente c = clienteFacade.find(rut);
 
-        if (c != null && clave != null && clave.equals(c.getClave())) {
+        if (c != null && clave != null && clave.equals(c.getClave()) && confirmarRut()) {
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", c.getNombre() + " " + c.getApellidoPaterno());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", c);

@@ -14,20 +14,19 @@
                 <h1>LOGIN</h1>
                 <h:graphicImage library="images" name="acceso.jpg" />
                 <br></br>
-                <p:panel id="login" header="Acceso" style="margin-bottom:20px; width: 600px;" >
+                <p:panel id="login" header="Acceso" style="margin-top: 20px; margin-bottom:20px; width: 400px;" >
 
-                    <h:panelGrid columns="2" cellpadding="5">
+                    <h:panelGrid columns="4" cellpadding="5">
                         <h:outputLabel for="rut" value="RUT" />
-                        <p:inputText id="username" value="#{clienteBean.rut}" required="true" label="username" />
-
+                        <p:inputText id="rut" value="#{clienteBean.rut}" required="true" label="username" size="8" />
+                        -
+                        <p:inputText id="dv" value="#{clienteBean.dv}" required="true" label="dv" size="1" />
                         <h:outputLabel for="password" value="CLAVE" />
-                        <p:password id="password" value="#{clienteBean.clave}" required="true" label="password" />
-
+                        <p:password id="password" value="#{clienteBean.clave}" required="true" label="password" size="8"/>
                         <f:facet name="footer">
                             <p:commandButton value="Login" update="msgs" actionListener="#{clienteBean.login}"
-                                             oncomplete="handleLoginRequest(xhr, status, args)" />
-                        </f:facet>  
-
+                                             oncomplete="handleLoginRequest(xhr, status, args)"/>
+                        </f:facet>
                     </h:panelGrid>
                 </p:panel>
                 <p:link outcome="Registro" value="Registrarse" style="margin-bottom: 20px;"/>

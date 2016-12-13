@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="resources/CSS/todo.css" media="screen" />
         <f:event type="preRenderView" listener="#{clienteBean.verificarSesionCliente()}"/>
     </h:head>
-    <h:body style="background-image: url('resources/images/fondo2.jpg');">
+    <h:body style="background-image: url('resources/images/fondo-01.jpg');">
 
         <h:form class="as"  >
             <p:growl id="messages"/>  
@@ -17,10 +17,19 @@
                 <li><h2><h:outputText class="active" style="color:white" value="Bienvenido #{clienteBean.esteCliente.nombre} #{clienteBean.esteCliente.apellidoPaterno} #{clienteBean.esteCliente.apellidoMaterno}"/></h2></li> 
                 <li><p:link  outcome="SolicitarPlan" value="Solicitar un Plan"></p:link></li>
                 <li><p:link outcome="VerPlan" value="Ver mis Planes"></p:link></li>
-                <li><p:commandLink  value="Cerrar Sesion" id="cerrarSesion" action="#{clienteBean.cerrarSesion()}" ajax="false" /></li>      
+                <li><p:commandLink  value="Cerrar Sesion" id="cerrarSesion" action="#{clienteBean.cerrarSesion()}" ajax="false" /></li> 
+                
             </ul>
         </h:form>
-
+        
+        <h:panelGrid class="ppa" columns="3" >
+            <br></br>
+            <input   type="image" src="resources/images/planS.png" width="300" height="300"   ></input> 
+        <input  type="image" src="resources/images/planL.png" width="300" style="margin-left:100px;"  ></input>
+        <input   type="image" src="resources/images/planM.png" width="300" style="margin-left:  50px;"  ></input>
+        </h:panelGrid>
+        
+        
     </h:body>
 </html>
 

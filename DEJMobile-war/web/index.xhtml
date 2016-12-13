@@ -6,18 +6,21 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <link rel="stylesheet" type="text/css" href="resources/CSS/todo.css" media="screen" />
         <f:event type="preRenderView" listener="#{clienteBean.verificarSesionCliente()}"/>
     </h:head>
-    <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
-        <h:form>
-            <p:growl id="messages"/>            
-            <p:panelGrid columns="2" style="width: 100vw;">
-                <h:outputText value="Bienvenido(a) #{clienteBean.esteCliente.nombre} #{clienteBean.esteCliente.apellidoPaterno} #{clienteBean.esteCliente.apellidoMaterno}"/>
-                <p:commandLink value="Cerrar Sesion" id="cerrarSesion" action="#{clienteBean.cerrarSesion()}" ajax="false" style="float: right;"/>
-            </p:panelGrid>
+    <h:body style="background-image: url('resources/images/fondo2.jpg');">
+
+        <h:form class="as"  >
+            <p:growl id="messages"/>  
+            <ul>
+                <li><h2><h:outputText class="active" style="color:white" value="Bienvenido #{clienteBean.esteCliente.nombre} #{clienteBean.esteCliente.apellidoPaterno} #{clienteBean.esteCliente.apellidoMaterno}"/></h2></li> 
+                <li><p:link  outcome="SolicitarPlan" value="Solicitar un Plan"></p:link></li>
+                <li><p:link outcome="VerPlan" value="Ver mis Planes"></p:link></li>
+                <li><p:commandLink  value="Cerrar Sesion" id="cerrarSesion" action="#{clienteBean.cerrarSesion()}" ajax="false" /></li>      
+            </ul>
         </h:form>
-        <p:link outcome="SolicitarPlan" value="Solicitar un Plan"></p:link><br/>
-        <p:link outcome="VerPlan" value="Ver mis Planes"></p:link>
+
     </h:body>
 </html>
 

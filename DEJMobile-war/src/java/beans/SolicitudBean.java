@@ -54,7 +54,6 @@ public class SolicitudBean implements Serializable {
     private boolean entrega;
     private int total;
     private Date fechaHora;
-    private Cliente clienteRut;
     private Cuota cuota_idCuota;
     private Minutos minutos_idMinutos;
     private String mensaje;
@@ -159,14 +158,6 @@ public class SolicitudBean implements Serializable {
         this.fechaHora = fechaHora;
     }
 
-    public Cliente getClienteRut() {
-        return clienteRut;
-    }
-
-    public void setClienteRut(Cliente clienteRut) {
-        this.clienteRut = clienteRut;
-    }
-
     public Cuota getCuota_idCuota() {
         return cuota_idCuota;
     }
@@ -215,15 +206,15 @@ public class SolicitudBean implements Serializable {
         this.minutos = minutos;
     }
 
-    public String crearSolicitud(String rutCliente, int idMinutos, int idCuota) {
+    public String crearSolicitud(String rutCliente) {
         Solicitud s = new Solicitud();
         s.setCodigo(codigo);
         s.setEntrega(entrega);
         s.setTotal(total);
-        s.setFechaHora(this.obtenerDiayHora());
+        s.setFechaHora(fechaHora);
         s.setClienterut(clienteFacade.find(rutCliente));
-        s.setMinutosidMinutos(minutosFacade.find(idMinutos));
-        s.setCuotaidCuota(cuotaFacade.find(idCuota));
+        s.setMinutosidMinutos(minutosFacade.find(minutos.getIdMinutos()));
+        s.setCuotaidCuota(cuotaFacade.find(cuota.getIdCuota()));
         this.solicitudFacade.create(s);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Solicitud Agregada exitosamente!!!"));
         return "SolicitudBean";
@@ -246,15 +237,6 @@ public class SolicitudBean implements Serializable {
         solicitudFacade.edit(s);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Solicitud actualizada!!!"));
         return "SolicitudBean";
-    }
-
-    public Date obtenerDiayHora() {
-        Date date = new Date();
-
-        DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-        hourdateFormat.format(date);
-        return date;
-
     }
 
     public String Paso2(ActionEvent actionEvent) {
@@ -285,7 +267,25 @@ public class SolicitudBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void sumarPrecios() {
-        total = cuota_idCuota.getPrecio() + minutos_idMinutos.getPrecio();
+    public int sumarPrecios() {
+        Cuota c = cuotaFacade.find(cuota.getIdCuota());
+        Minutos m = minutosFacade.find(minutos.getIdMinutos());
+        total = c.getPrecio() + m.getPrecio();
+        return total;
+    }
+    
+    public String descripcionCuota() {
+        Cuota c = cuotaFacade.find(cuota.getIdCuota());
+        return c.getDescripcion();
+    }
+    
+    public String descripcionMinutos() {
+        Minutos m = minutosFacade.find(minutos.getIdMinutos());
+        return m.getDescripcion();
+    }
+    
+    public Cliente esteCliente(int rut){
+        Cliente c = clienteFacade.find(rut);
+        return c;
     }
 }

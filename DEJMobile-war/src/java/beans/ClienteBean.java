@@ -176,7 +176,7 @@ public class ClienteBean implements Serializable {
             }
 
             if (!digitoFinal.equalsIgnoreCase(dv)) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("RUT NO VALIDO."));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("EL DV NO ES VÁLIDO."));
                 return false;
             }
         } catch (Exception e) {
@@ -239,6 +239,10 @@ public class ClienteBean implements Serializable {
 
     public String signIn() {
         try {
+            if (!this.confirmarRut()){
+                return "Registro";
+            } 
+            
             if (this.clienteFacade.find(rut) != null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Usuario ya creado"));
                 return "Registro";

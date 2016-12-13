@@ -57,14 +57,13 @@
                     <p:panelGrid  columns="2">
 
                         <p:outputLabel for="cuota" value="Cuota: " />
-                        <p:selectOneMenu id="cuota" value="#{solicitudBean.cuota.idCuota}" style="width:125px" required="true">
+                        <p:selectOneMenu id="cuota" value="#{solicitudBean.cuota.idCuota}" style="width:125px" required="true" >
                             <f:selectItems value="#{solicitudBean.cuotas}" var="c" itemLabel="#{c.descripcion} - $#{c.precio}" itemValue="#{c.idCuota}" />
                         </p:selectOneMenu>
                         
-                        
                         <p:outputLabel for="minutos" value="Minutos: " />
                         <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos.idMinutos}" style="width:125px" required="true">
-                            <f:selectItems   value="#{solicitudBean.minutosList}" var="m" itemLabel="#{m.descripcion} - $#{m.precio}" itemValue="#{m.idMinutos}" />
+                            <f:selectItems value="#{solicitudBean.minutosList}" var="m" itemLabel="#{m.descripcion} - $#{m.precio}" itemValue="#{m.idMinutos}" />
                         </p:selectOneMenu>
                         
                         <p:selectBooleanCheckbox value="#{solicitudBean.entrega}"/>

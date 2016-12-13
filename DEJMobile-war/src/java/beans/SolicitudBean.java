@@ -147,7 +147,6 @@ public class SolicitudBean implements Serializable {
         this.fechaHora = fechaHora;
     }
 
-
     public Solicitud getSolicitud() {
         return solicitud;
     }
@@ -187,7 +186,7 @@ public class SolicitudBean implements Serializable {
 
             Solicitud s = new Solicitud();
             s.setEntrega(entrega);
-            s.setTotal(this.sumarPrecios());
+            s.setTotal(total);
             s.setFechaHora(Date.from(instant));
             s.setClienterut(clienteFacade.find(rutCliente));
             s.setMinutosidMinutos(minutosFacade.find(minutos.getIdMinutos()));
@@ -212,7 +211,7 @@ public class SolicitudBean implements Serializable {
     public String actualizar() {
         Date date = new Date();
         Instant instant = Instant.ofEpochMilli(date.getTime());
-        
+
         Solicitud s = solicitudFacade.find(solicitud.getCodigo());
         s.setEntrega(entrega);
         s.setTotal(this.sumarPrecios());
@@ -262,4 +261,34 @@ public class SolicitudBean implements Serializable {
         Cliente c = clienteFacade.find(rut);
         return c;
     }
+
+    public String paso2() {
+        sumarPrecios();
+        return "ConfirmarPlan";
+    }
+
+    public String promo1() {
+        total = 4990;
+        this.cuota.setIdCuota(1);
+        this.minutos.setIdMinutos(1);
+        this.entrega = false;
+        return "ConfirmarPlan";
+    }
+
+    public String promo2() {
+        total = 7990;
+        this.cuota.setIdCuota(2);
+        this.minutos.setIdMinutos(2);
+        this.entrega = false;
+        return "ConfirmarPlan";
+    }
+
+    public String promo3() {
+        total = 9990;
+        this.cuota.setIdCuota(3);
+        this.minutos.setIdMinutos(3);
+        this.entrega = false;
+        return "ConfirmarPlan";
+    }
+
 }

@@ -64,7 +64,7 @@
                         </p:selectOneMenu>
 
                         <p:outputLabel for="minutos" value="Minutos: " />
-                        <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos.idMinutos}" style="width:125px" required="true">
+                        <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos.idMinutos}" style="width:125px" required="true" >
                             <f:selectItems value="#{solicitudBean.minutosList}" var="m" itemLabel="#{m.descripcion} - $#{m.precio}" itemValue="#{m.idMinutos}" />
                         </p:selectOneMenu>
 

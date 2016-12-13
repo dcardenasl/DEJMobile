@@ -10,15 +10,22 @@
     </h:head>
     <h:body style="background-image: url('resources/images/fondo2.jpg');">
         <ui:include src="includes/menu.xhtml"/> <!-- Para incluir el menu -->
+        <h:form>
 
-        <h:panelGrid class="ppa" columns="3" >
 
-            <input  class="a" type="image" src="resources/images/planS.png" width="300" height="300"   > </input> 
-            <input  class="b" type="image" src="resources/images/planL.png" width="300" style="margin-left:100px;"  ></input>
-            <input  class="c" type="image" src="resources/images/planM.png" width="300" style="margin-left:  50px;"  ></input>
+            <h:panelGrid class="ppa" columns="3" >
+                <p:commandLink action="#{solicitudBean.promo1()}">
+                    <h:graphicImage library="images" name="planS.png" width="300" height="300"/>
+                </p:commandLink>
+                <p:commandLink action="#{solicitudBean.promo3()}">
+                    <h:graphicImage library="images" name="planL.png" width="300" style="margin-left:100px;"/>
+                </p:commandLink>
+                <p:commandLink action="#{solicitudBean.promo2()}">
+                    <h:graphicImage library="images" name="planM.png" width="300" style="margin-left:  50px;"/>
+                </p:commandLink>
 
-        </h:panelGrid>
-
+            </h:panelGrid>
+        </h:form>
 
     </h:body>
 </html>

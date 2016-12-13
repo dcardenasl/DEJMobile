@@ -18,7 +18,7 @@
                     <h:outputText value="Cuota: #{solicitudBean.descripcionCuota()}"/> <br/>
                     <h:outputText value="Minutos: #{solicitudBean.descripcionMinutos()}"/> <br/>
                     <h:outputText value="Entrega: #{solicitudBean.entrega eq true ? (solicitudBean.esteCliente(clienteBean.rut).direccion.concat(' #').concat(solicitudBean.esteCliente(clienteBean.rut).numeracion)): 'Retiro en sucursal' }"/> <br/>
-                    <h:outputText value="Precio total: $#{solicitudBean.sumarPrecios()}"/>
+                    <h:outputText value="Precio total: $#{solicitudBean.total}"/>
                 </p:panel>
                 <br/><br/>
 

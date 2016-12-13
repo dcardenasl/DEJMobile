@@ -32,7 +32,7 @@
                         <h:outputText value="Entrega del Chip en Domicilio"/>
 
                         <p:link class="btnn" outcome="index" value="Volver"></p:link>
-                        <p:commandButton value="Paso 2" id="paso2" update="growl" action="ConfirmarPlan.xhtml?faces-redirect=true" ajax="false" />
+                        <p:commandButton value="Paso 2" id="paso2" update="growl" action="#{solicitudBean.paso2()}" ajax="false" />
 
                     </h:panelGrid>
                 </p:panel>

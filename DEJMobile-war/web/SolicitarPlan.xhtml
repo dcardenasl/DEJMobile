@@ -6,35 +6,41 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <link rel="stylesheet" type="text/css" href="resources/CSS/todo.css" media="screen" />
     </h:head>
     <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
         <center>
-            <h1>ARMA TU PLAN :: PASO 1</h1>
+            <h1>ARMA TU PLAN </h1>
+            <h2>:: PASO 1</h2>
             <h:form id="form">
                 <p:growl id="growl" life="2000" />
-                <p:panel id="Plan" header="Plan" style="margin-top: 20px ;height:500px; width: 450px;">
-                    <h:panelGrid columns="2" cellpadding="1">
+                <p:panel id="Plan" header="Plan" style="margin-top:3px ;height:400px; width: 550px;"><br></br>
+                    <h:panelGrid columns="2" cellpadding="2">
+                        
                         <p:outputLabel for="cuota" value="Cuota: " />
                         <p:selectOneMenu id="cuota" value="#{solicitudBean.cuota.idCuota}" style="width:125px" required="true">
                             <f:selectItems value="#{solicitudBean.cuotas}" var="c" itemLabel="#{c.descripcion} - $#{c.precio}" itemValue="#{c.idCuota}" />
                         </p:selectOneMenu>
+                        
+                        
                         <p:outputLabel for="minutos" value="Minutos: " />
                         <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos.idMinutos}" style="width:125px" required="true">
                             <f:selectItems value="#{solicitudBean.minutosList}" var="m" itemLabel="#{m.descripcion} - $#{m.precio}" itemValue="#{m.idMinutos}" />
                         </p:selectOneMenu>
+                        
                         <p:selectBooleanCheckbox value="#{solicitudBean.entrega}"/>
                         <h:outputText value="Entrega del Chip en Domicilio"/>
-                        <p:link outcome="index" value="Volver">
-                        </p:link>
-                        <br/>
+                        
+                        <p:link class="btnn" outcome="index" value="Volver"></p:link>
                         <p:commandButton value="Paso 2" id="paso2" update="growl" action="ConfirmarPlan.xhtml?faces-redirect=true" ajax="false" />
+                        
                     </h:panelGrid>
                 </p:panel>
 
             </h:form>
 
         </center>
-
+        
     </h:body>
 </html>
 

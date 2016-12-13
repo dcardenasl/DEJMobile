@@ -8,6 +8,8 @@ and open the template in the editor.
     Author     : Romanet
 */
 
+
+
 .btn {
     background: #3498db; 
     background-image: -webkit-linear-gradient(top, #3498db, #2980b9); 
@@ -27,6 +29,29 @@ and open the template in the editor.
 
 .btn:hover {
     background: #3cb0fd; 
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db); 
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db); 
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db); 
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db); 
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db); 
+    text-decoration: none; 
+}
+
+.btnn {
+    background: #DCDCDC; 
+    font-family: Arial; 
+    color: #ffffff; 
+    padding: 5px 25px 5px 25px; 
+    text-decoration: none; 
+
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border: 2px solid #A9A9A9;
+}
+
+.btnn:hover {
+    background: #3cb0fd ; 
     background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db); 
     background-image: -moz-linear-gradient(top, #3cb0fd, #3498db); 
     background-image: -ms-linear-gradient(top, #3cb0fd, #3498db); 

@@ -7,10 +7,7 @@ package beans;
 
 import javax.inject.Named;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -209,20 +206,25 @@ public class SolicitudBean implements Serializable {
     }
 
     public String crearSolicitud(int rutCliente) {
-        Date date = new Date();
-        Instant instant = Instant.ofEpochMilli(date.getTime());
+        try {
+            Date date = new Date();
+            Instant instant = Instant.ofEpochMilli(date.getTime());
 
-        
-        Solicitud s = new Solicitud();
-        s.setEntrega(entrega);
-        s.setTotal(total);
-        s.setFechaHora(Date.from(instant));
-        s.setClienterut(clienteFacade.find(rutCliente));
-        s.setMinutosidMinutos(minutosFacade.find(minutos.getIdMinutos()));
-        s.setCuotaidCuota(cuotaFacade.find(cuota.getIdCuota()));
-        this.solicitudFacade.create(s);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Solicitud Agregada exitosamente!!!"));
-        return "SolicitudBean";
+            Solicitud s = new Solicitud();
+            s.setEntrega(entrega);
+            s.setTotal(total);
+            s.setFechaHora(Date.from(instant));
+            s.setClienterut(clienteFacade.find(rutCliente));
+            s.setMinutosidMinutos(minutosFacade.find(minutos.getIdMinutos()));
+            s.setCuotaidCuota(cuotaFacade.find(cuota.getIdCuota()));
+            this.solicitudFacade.create(s);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Solicitud Agregada exitosamente!!!"));
+            return "VerPlan";
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error, vuelva a intentarlo"));
+            return "ConfirmarPlan";
+        }
+
     }
 
     public String eliminar(Solicitud solicitud) {
@@ -278,18 +280,18 @@ public class SolicitudBean implements Serializable {
         total = c.getPrecio() + m.getPrecio();
         return total;
     }
-    
+
     public String descripcionCuota() {
         Cuota c = cuotaFacade.find(cuota.getIdCuota());
         return c.getDescripcion();
     }
-    
+
     public String descripcionMinutos() {
         Minutos m = minutosFacade.find(minutos.getIdMinutos());
         return m.getDescripcion();
     }
-    
-    public Cliente esteCliente(int rut){
+
+    public Cliente esteCliente(int rut) {
         Cliente c = clienteFacade.find(rut);
         return c;
     }

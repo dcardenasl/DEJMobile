@@ -12,7 +12,7 @@
         <h:form>
             <p:growl id="messages"/>            
             <p:panelGrid columns="2" style="width: 100vw;">
-                <h:outputText value="Bienvenido #{clienteBean.esteCliente.nombre} #{clienteBean.esteCliente.apellidoPaterno}"/>
+                <h:outputText value="Bienvenido(a) #{clienteBean.esteCliente.nombre} #{clienteBean.esteCliente.apellidoPaterno} #{clienteBean.esteCliente.apellidoMaterno}"/>
                 <p:commandLink value="Cerrar Sesion" id="cerrarSesion" action="#{clienteBean.cerrarSesion()}" ajax="false" style="float: right;"/>
             </p:panelGrid>
         </h:form>

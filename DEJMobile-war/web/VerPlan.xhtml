@@ -13,7 +13,7 @@
         <center>
         <h1>MIS PLANES</h1>
         </center>
-        <br></br>
+        <br>
         <h:form id="planes">
             <p:dataTable value="#{solicitudBean.MisSolicitudes(clienteBean.rut)}" var="ms">
                 <p:column headerText="Código">
@@ -42,11 +42,45 @@
                 <p:column headerText="Total">
                     <h:outputText value="$#{ms.total}"/>
                 </p:column>
+                <p:column headerText="ELIMINAR" style="text-align: center">
+                    <p:commandButton icon="ui-icon-close" title="Eliminar" action="#{solicitudBean.eliminar(ms)}" update="planes"/>
+                </p:column>
+                <p:column headerText="EDITAR" style="text-align: center">
+                    <p:commandButton update=":planes:panelEditar" oncomplete="PF('dialogo').show()" icon="ui-icon-search" title="Editar">
+                        <f:setPropertyActionListener value="#{s}" target="#{solicitudBean.solicitud}" />
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
-            <center>
-            <br></br>
+
+            
+            <p:dialog header="Editar Solicitud" widgetVar="dialogo" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="panelEditar" style="text-align:center;">
+                    <p:panelGrid  columns="2">
+
+                        <p:outputLabel for="cuota" value="Cuota: " />
+                        <p:selectOneMenu id="cuota" value="#{solicitudBean.cuota.idCuota}" style="width:125px" required="true">
+                            <f:selectItems value="#{solicitudBean.cuotas}" var="c" itemLabel="#{c.descripcion} - $#{c.precio}" itemValue="#{c.idCuota}" />
+                        </p:selectOneMenu>
+                        
+                        
+                        <p:outputLabel for="minutos" value="Minutos: " />
+                        <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos.idMinutos}" style="width:125px" required="true">
+                            <f:selectItems value="#{solicitudBean.minutosList}" var="m" itemLabel="#{m.descripcion} - $#{m.precio}" itemValue="#{m.idMinutos}" />
+                        </p:selectOneMenu>
+                        
+                        <p:selectBooleanCheckbox value="#{solicitudBean.entrega}"/>
+                        <h:outputText value="Entrega del Chip en Domicilio"/>
+
+                        <p:commandButton value="Actualizar" 
+                                         actionListener="#{solicitudBean.actualizar()}"
+                                         update=":planes,mensaje"/>
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+            
+            <br>
             <p:link class="btnn" style="color: #000000" outcome="index" value="Volver"></p:link>
-            </center>
+
         </h:form>
         
         <script type="text/javascript">

@@ -13,7 +13,7 @@
         <center>
         <h1>MIS PLANES</h1>
         </center>
-      
+
         <h:form id="planes">
             <p:dataTable value="#{solicitudBean.MisSolicitudes(clienteBean.rut)}" var="ms">
                 <p:column headerText="Código">
@@ -47,7 +47,7 @@
                 </p:column>
                 <p:column headerText="EDITAR" style="text-align: center">
                     <p:commandButton update=":planes:panelEditar" oncomplete="PF('dialogo').show()" icon="ui-icon-search" title="Editar">
-                        <f:setPropertyActionListener value="#{s}" target="#{solicitudBean.solicitud}" />
+                        <f:setPropertyActionListener value="#{ms}" target="#{solicitudBean.solicitud}" />
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
@@ -65,7 +65,7 @@
                         
                         <p:outputLabel for="minutos" value="Minutos: " />
                         <p:selectOneMenu id="minutos" value="#{solicitudBean.minutos.idMinutos}" style="width:125px" required="true">
-                            <f:selectItems value="#{solicitudBean.minutosList}" var="m" itemLabel="#{m.descripcion} - $#{m.precio}" itemValue="#{m.idMinutos}" />
+                            <f:selectItems   value="#{solicitudBean.minutosList}" var="m" itemLabel="#{m.descripcion} - $#{m.precio}" itemValue="#{m.idMinutos}" />
                         </p:selectOneMenu>
                         
                         <p:selectBooleanCheckbox value="#{solicitudBean.entrega}"/>
@@ -77,10 +77,9 @@
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>
-            <br></br>
-            <center>
+
             <p:link class="btnn" style="color: #000000" outcome="index" value="Volver"></p:link>
-            </center>
+
         </h:form>
         
         <script type="text/javascript">

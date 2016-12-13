@@ -19,12 +19,44 @@ h1,h2{
     text-shadow: 3px 1px 1px rgba(126, 126, 124, 1);
     margin-left:35px;
 }
-    
 
-.ppa{
+
+.ppa {
     margin: 100px;
     padding: 10px 20px 10px 20px; 
+    -moz-transition: all 0.8s ease-in-out;
+    -webkit-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+
+
 }
+
+ .a:hover{
+-moz-transform: rotate(360deg);
+-webkit-transform: rotate(360deg);
+-o-transform: rotate(360deg);
+-ms-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+
+ .b:hover{
+-moz-transform: rotate(360deg);
+-webkit-transform: rotate(360deg);
+-o-transform: rotate(360deg);
+-ms-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+
+ .c:hover{
+-moz-transform: rotate(360deg);
+-webkit-transform: rotate(360deg);
+-o-transform: rotate(360deg);
+-ms-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+
 
 .btn {
     background: #3498db ; 
@@ -121,7 +153,7 @@ h1,h2{
     margin: 0px;
 }   
 .as active { 
-    
+
     padding: 60px; 
     text-align:center; 
 } 

@@ -36,16 +36,16 @@ public class ClienteBean implements Serializable {
     /**
      * Creates a new instance of ClienteBean
      */
-    private int rut;
+    private Integer rut;
     private String dv;
     private String clave;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String direccion;
-    private int numeracion;
+    private Integer numeracion;
     private String comuna;
-    private int telefono;
+    private Integer telefono;
     boolean loggedIn = false;
     private Cliente cliente;
 
@@ -63,11 +63,11 @@ public class ClienteBean implements Serializable {
         this.cliente = cliente;
     }
 
-    public int getRut() {
+    public Integer getRut() {
         return rut;
     }
 
-    public void setRut(int rut) {
+    public void setRut(Integer rut) {
         this.rut = rut;
     }
 
@@ -119,11 +119,11 @@ public class ClienteBean implements Serializable {
         this.direccion = direccion;
     }
 
-    public int getNumeracion() {
+    public Integer getNumeracion() {
         return numeracion;
     }
 
-    public void setNumeracion(int numeracion) {
+    public void setNumeracion(Integer numeracion) {
         this.numeracion = numeracion;
     }
 
@@ -135,11 +135,11 @@ public class ClienteBean implements Serializable {
         this.comuna = comuna;
     }
 
-    public int getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
 
@@ -156,7 +156,6 @@ public class ClienteBean implements Serializable {
         String digitoFinal;
 
         try {
-            //13139029-1
             for (int i = String.valueOf(rut).length() - 1; i >= 0; i--) {
                 char r = String.valueOf(rut).charAt(i); // '9'
                 String n = String.valueOf(r);
@@ -167,7 +166,6 @@ public class ClienteBean implements Serializable {
                     count = 2;
                 }
             }
-            //paso e y f
             digitoCalculado = 11 - suma % 11;
             if (digitoCalculado == 10) {
                 digitoFinal = "K";
@@ -204,7 +202,8 @@ public class ClienteBean implements Serializable {
             context.addCallbackParam("view", "index.xhtml");
         } else {
             loggedIn = false;
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
+            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "RUT o Clave no validas");
+            FacesContext.getCurrentInstance().addMessage(null, message);
             context.addCallbackParam("view", "logueo.xhtml");
         }
 
@@ -239,21 +238,26 @@ public class ClienteBean implements Serializable {
     }
 
     public String signIn() {
-        String textoEncriptadoConMD5 = DigestUtils.md5Hex(clave);
+        try {
+            String textoEncriptadoConMD5 = DigestUtils.md5Hex(clave);
+            Cliente c = new Cliente();
+            c.setRut(rut);
+            c.setClave(textoEncriptadoConMD5);
+            c.setNombre(nombre);
+            c.setApellidoPaterno(apellidoPaterno);
+            c.setApellidoMaterno(apellidoMaterno);
+            c.setDireccion(direccion);
+            c.setNumeracion(numeracion);
+            c.setComuna(comuna);
+            c.setTelefono(telefono);
+            this.clienteFacade.create(c);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente creado exitosamente!!!", "Ingrese con su rut y clave"));
+            return "logueo";
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Vuelva a ingresar los datos"));
+            return "logueo";
+        }
 
-        Cliente c = new Cliente();
-        c.setRut(rut);
-        c.setClave(textoEncriptadoConMD5);
-        c.setNombre(nombre);
-        c.setApellidoPaterno(apellidoPaterno);
-        c.setApellidoMaterno(apellidoMaterno);
-        c.setDireccion(direccion);
-        c.setNumeracion(numeracion);
-        c.setComuna(comuna);
-        c.setTelefono(telefono);
-        this.clienteFacade.create(c);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente creado exitosamente!!!"));
-        return "ClienteBean";
     }
 
 }

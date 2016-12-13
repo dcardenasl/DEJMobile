@@ -8,12 +8,12 @@
     <h:head>
         <link rel="stylesheet" type="text/css" href="resources/CSS/todo.css" media="screen" />
     </h:head>
-    <h:body style="background-image: url('../resources/images/fondo-01.jpg');">
+    <h:body style="background-image: url('../resources/images/fondo2.jpg');">
         <p:messages id="mensaje" showDetail="true" autoUpdate="false"/>
         <center>
         <h1>MIS PLANES</h1>
         </center>
-        <br>
+      
         <h:form id="planes">
             <p:dataTable value="#{solicitudBean.MisSolicitudes(clienteBean.rut)}" var="ms">
                 <p:column headerText="Código">
@@ -77,10 +77,10 @@
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>
-            
-            <br>
+            <br></br>
+            <center>
             <p:link class="btnn" style="color: #000000" outcome="index" value="Volver"></p:link>
-
+            </center>
         </h:form>
         
         <script type="text/javascript">

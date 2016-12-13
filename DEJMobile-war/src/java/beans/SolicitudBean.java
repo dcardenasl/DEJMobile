@@ -212,7 +212,7 @@ public class SolicitudBean implements Serializable {
 
             Solicitud s = new Solicitud();
             s.setEntrega(entrega);
-            s.setTotal(total);
+            s.setTotal(this.sumarPrecios());
             s.setFechaHora(Date.from(instant));
             s.setClienterut(clienteFacade.find(rutCliente));
             s.setMinutosidMinutos(minutosFacade.find(minutos.getIdMinutos()));
@@ -231,30 +231,23 @@ public class SolicitudBean implements Serializable {
         Solicitud s = solicitudFacade.find(solicitud.getCodigo());
         solicitudFacade.remove(s);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Solicitud Eliminada!!!"));
-        return "SolicitudBean";
+        return "VerPlan";
     }
 
     public String actualizar() {
+        Date date = new Date();
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        
         Solicitud s = solicitudFacade.find(solicitud.getCodigo());
         s.setEntrega(entrega);
-        s.setTotal(total);
+        s.setTotal(this.sumarPrecios());
+        s.setFechaHora(Date.from(instant));
         s.setClienterut(clienteFacade.find(cliente.getRut()));
         s.setMinutosidMinutos(minutosFacade.find(minutos.getIdMinutos()));
         s.setCuotaidCuota(cuotaFacade.find(cuota.getIdCuota()));
         solicitudFacade.edit(s);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Solicitud actualizada!!!"));
-        return "SolicitudBean";
-    }
-
-    public String Paso2(ActionEvent actionEvent) {
-        if (this.cuota != null && this.minutos != null) {
-            addMensaje("Aprobado!!");
-            return "ConfirmarPlan";
-        } else {
-            addMensaje("Rechazado!!");
-            return "SolicitarPlan";
-        }
-
+        return "VerPlan";
     }
 
     public List<Solicitud> MisSolicitudes(int rut) {

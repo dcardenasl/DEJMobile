@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -38,14 +40,20 @@ public class Solicitud implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "codigo")
     private Integer codigo;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "entrega")
-    private Boolean entrega;
+    private boolean entrega;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "total")
-    private Integer total;
+    private int total;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fechaHora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
@@ -66,6 +74,13 @@ public class Solicitud implements Serializable {
         this.codigo = codigo;
     }
 
+    public Solicitud(Integer codigo, boolean entrega, int total, Date fechaHora) {
+        this.codigo = codigo;
+        this.entrega = entrega;
+        this.total = total;
+        this.fechaHora = fechaHora;
+    }
+
     public Integer getCodigo() {
         return codigo;
     }
@@ -74,19 +89,19 @@ public class Solicitud implements Serializable {
         this.codigo = codigo;
     }
 
-    public Boolean getEntrega() {
+    public boolean getEntrega() {
         return entrega;
     }
 
-    public void setEntrega(Boolean entrega) {
+    public void setEntrega(boolean entrega) {
         this.entrega = entrega;
     }
 
-    public Integer getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

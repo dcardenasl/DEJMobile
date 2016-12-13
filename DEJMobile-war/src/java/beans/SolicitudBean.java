@@ -9,6 +9,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -206,12 +208,15 @@ public class SolicitudBean implements Serializable {
         this.minutos = minutos;
     }
 
-    public String crearSolicitud(String rutCliente) {
+    public String crearSolicitud(int rutCliente) {
+        Date date = new Date();
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+
+        
         Solicitud s = new Solicitud();
-        s.setCodigo(codigo);
         s.setEntrega(entrega);
         s.setTotal(total);
-        s.setFechaHora(fechaHora);
+        s.setFechaHora(Date.from(instant));
         s.setClienterut(clienteFacade.find(rutCliente));
         s.setMinutosidMinutos(minutosFacade.find(minutos.getIdMinutos()));
         s.setCuotaidCuota(cuotaFacade.find(cuota.getIdCuota()));

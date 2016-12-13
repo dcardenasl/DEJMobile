@@ -33,7 +33,7 @@
                 </p:column>
                 <p:column headerText="Ingreso">
                     <h:outputText value="#{ms.fechaHora}">
-                        <f:convertDateTime type="date" locale="es" dateStyle="long"/>
+                        <f:convertDateTime type="both" locale="es" dateStyle="long" timeZone="Chile/Continental" />
                     </h:outputText>
                 </p:column>
                 <p:column headerText="Total">
